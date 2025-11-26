@@ -4,7 +4,6 @@ const path = require('path')
 const pageRoutes = require("./routes/pages");
 require('dotenv').config()
 
-app.get('/favicon.ico', (req, res) => res.status(204).end());
 const PORT = process.env.PORT
 
 app.use(express.static("public"));

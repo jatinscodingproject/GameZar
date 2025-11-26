@@ -4,8 +4,18 @@ exports.homePage = async(req, res) => {
             title: "Home Page",
         });
     } catch (error) {
-        console.error("Error loading home page:", error);
+        res.status(500).render("pages/error", {
+            message: "Something went wrong!",
+        });
+    }
+};
 
+exports.loginPage = async(req, res) => {
+    try {
+        res.render("pages/login", {
+            title: "Home Page",
+        });
+    } catch (error) {
         res.status(500).render("pages/error", {
             message: "Something went wrong!",
         });

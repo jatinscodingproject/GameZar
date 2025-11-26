@@ -137,18 +137,23 @@
             card.className = "game-card card-3d bg-gray-800 rounded-xl overflow-hidden neon-border";
 
             card.innerHTML = `
-            <div class="bg-gray-700 h-48 flex items-center justify-center text-4xl"><img 
-                    src="http://46.62.253.110/games/107Games/${newgames}/img.png"
-                    onerror="this.onerror=null; this.src='http://46.62.253.110/games/107Games/${newgames}/img.jpg';"
-                ></div>
-            <div class="p-4">
-                <h3 class="text-xl font-bold">${newgames}</h3>
-                <button onclick="playGame('${game}')"
-                    class="w-full mt-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white py-2 rounded-lg font-medium">
-                    Play Now
-                </button>
-            </div>
-        `;
+                <div class="bg-gray-700 h-48 flex items-center justify-center text-4xl">
+                    <img 
+                        src="http://46.62.253.110/games/107Games/${newgames}/img.png"
+                        onerror="this.onerror=null; this.src='http://46.62.253.110/games/107Games/${newgames}/img.jpg';"
+                    >
+                </div>
+
+                <div class="p-4">
+                    <h3 class="text-xl font-bold" style="color:white;">${newgames}</h3>
+
+                    <button onclick="playGame('${game}')"
+                        class="w-full mt-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white py-2 rounded-lg font-medium">
+                        Play Now
+                    </button>
+                </div>
+            `;
+
 
             container.appendChild(card);
         });
@@ -164,20 +169,6 @@
     });
 
 
-    // function playGame(gameName) {
-    //     const messageDiv = document.createElement('div');
-    //     messageDiv.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-full shadow-2xl z-50 font-bold text-lg';
-    //     messageDiv.style.animation = 'slideDown 0.5s ease-out, fadeIn 0.5s ease-out';
-    //     messageDiv.textContent = `Loading ${gameName}...`;
-
-    //     document.body.appendChild(messageDiv);
-
-    //     setTimeout(() => {
-    //         messageDiv.style.animation = 'slideUp 0.5s ease-out';
-    //         setTimeout(() => messageDiv.remove(), 500);
-    //     }, 2000);
-    // }
-
     window.addEventListener('load', () => {
         setTimeout(() => {
             document.getElementById('loadingScreen').classList.add('hidden');
@@ -186,8 +177,6 @@
         }, 2500);
     });
 
-    setInterval(autoSlide, 5000);
-    setInterval(changeQuote, 4000);
 
     async function onConfigChange(config) {
         const topbarTextEl = document.getElementById('topbarText');
@@ -282,3 +271,19 @@
             }
         }
     })();
+
+    document.addEventListener("DOMContentLoaded", () => {
+        let currentQuote = 0;
+        const quotes = document.querySelectorAll("#quoteSlider .quote");
+
+        if (quotes.length > 0) {
+            quotes[0].classList.add("active");
+        }
+
+        function changeQuote() {
+            quotes[currentQuote].classList.remove("active");
+            currentQuote = (currentQuote + 1) % quotes.length;
+            quotes[currentQuote].classList.add("active");
+        }
+        setInterval(changeQuote, 3000);
+    });
