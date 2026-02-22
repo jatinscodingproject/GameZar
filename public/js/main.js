@@ -160,7 +160,7 @@
     }
 
     function playGame(game) {
-        const url = `http://46.62.253.110/games/107Games/${game}/index.html`;
+        const url = `http://gamzlab.com/games/107Games/${game}/index.html`;
         window.location.href = url;
     }
 
