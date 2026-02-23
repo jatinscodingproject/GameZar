@@ -139,8 +139,8 @@
             card.innerHTML = `
                 <div class="bg-gray-700 h-48 flex items-center justify-center text-4xl">
                     <img 
-                        src="http://46.62.253.110/games/107Games/${newgames}/img.png"
-                        onerror="this.onerror=null; this.src='http://46.62.253.110/games/107Games/${newgames}/img.jpg';"
+                        src="http://gamzlab.com/games/107Games/${newgames}/img.png"
+                        onerror="this.onerror=null; this.src='http://gamzlab.com/games/107Games/${newgames}/img.jpg';"
                     >
                 </div>
 
@@ -160,10 +160,29 @@
     }
 
     function playGame(game) {
-        const url = `http://gamzlab.com/games/107Games/${game}/index.html`;
-        window.location.href = url;
-    }
+    const iframe = document.getElementById("gameFrame");
+    const modal = document.getElementById("gameModal");
 
+    iframe.src = `https://gamzlab.com/games/107Games/${game}/index.html`;
+    modal.classList.remove("hidden");
+}
+    function closeGame() {
+    const modal = document.getElementById("gameModal");
+    const iframe = document.getElementById("gameFrame");
+
+    iframe.src = "";
+    modal.classList.add("hidden");
+}
+
+function openFullscreen() {
+    const iframe = document.getElementById("gameFrame");
+
+    if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+    } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+    }
+}
     window.addEventListener("load", () => {
         renderGamesFromServer();
     });
